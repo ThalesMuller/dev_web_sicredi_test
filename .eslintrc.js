@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
 	'env': {
 		'browser': true,
@@ -22,10 +21,7 @@ module.exports = {
 		'@typescript-eslint'
 	],
 	'rules': {
-		'indent': [
-			'error',
-			'tab'
-		],
+		'indent': ['error', 'tab', { "SwitchCase": 1 }],
 		'linebreak-style': [
 			'error',
 			'windows'
