@@ -29,6 +29,16 @@
     --blue-light: #ABDEEF;
     --blue-dark: #102A63;
     --blue-twitter: #00B1EB;
+
+    --sicredi-main-green: #3fa110;
+    --sicredi-darkest-green: #323c32;
+
+    --sicredi-text-green: #64c832;
+    --sicredi-text-gray: #757575;
+    
+    --sicredi-white-background: #fbfbfb;
+    --sicredi-gray-background: #5a645b;
+    --sicredi-green-background: #69be41;
 }
 
 @media (max-width: 991px) {
@@ -44,8 +54,8 @@
 }
 
 body {
-    background: var(--background);
-    color: var(--text);
+    background: var(--sicredi-white-background);
+    color: var(--sicredi-text-gray);
 }
 
 body,
