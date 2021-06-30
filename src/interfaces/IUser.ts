@@ -4,3 +4,8 @@ export default interface IUser {
 	username: string;
 	password: string;
 }
+
+export interface ISignInCredentials {
+	username: string;
+	password: string;
+}
