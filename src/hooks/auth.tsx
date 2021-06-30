@@ -6,21 +6,16 @@ import React, {
 } from 'react';
 
 import Login from '../services/mocked-login-api';
-import IUser from '../interfaces/IUser';
+import IUser, { ISignInCredentials } from '../interfaces/IUser';
 
 
 interface AuthState {
 	user: IUser;
 }
 
-interface SignInCredentials {
-	username: string;
-	password: string;
-}
-
 interface AuthContextData {
 	user: IUser;
-	signIn(credentials: SignInCredentials): void;
+	signIn(credentials: ISignInCredentials): void;
 	signOut(): void;
 	updateUser(user: IUser): void;
 }
