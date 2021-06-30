@@ -24,7 +24,7 @@ function Route({ isPrivate = false, component: Component, ...rest }: RouteProps)
 				) : (
 					<Redirect
 						to={{
-							pathname: isPrivate ? '/' : '/dashboard',
+							pathname: isPrivate ? '/' : '/home',
 							state: { from: location },
 						}}
 					/>
