@@ -15,6 +15,8 @@ const Routes: React.FC = () => {
 			<Route path='/new' component={Details} isPrivate />
 			<Route path='/details/:id' component={Details} isPrivate />
 			<Route path='/edit/:id' component={Details} isPrivate />
+			
+			<Route path='*' component={Login}  />
 		</Switch>
 	);
 };
