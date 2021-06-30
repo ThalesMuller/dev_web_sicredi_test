@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes } from 'react';
 import CustomButton from './styles';
 
-export default function Button(): JSX.Element {
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+	loading?: boolean;
+};
+
+const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
 	return (
-		<CustomButton>
-			Detail list
+		<CustomButton type="button" {...rest}>
+			{loading ? 'Carregando...' : children}
 		</CustomButton>
 	);
 }
+
+export default Button;
