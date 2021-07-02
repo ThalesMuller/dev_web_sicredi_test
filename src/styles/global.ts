@@ -1,4 +1,9 @@
-﻿* {
+﻿import { createGlobalStyle } from 'styled-components';
+
+export default createGlobalStyle`
+
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -30,7 +35,7 @@
     --blue-dark: #102A63;
     --blue-twitter: #00B1EB;
 
-    --sicredi-main-green: #3fa110;
+    --main-color: #f5f6fa;
     --sicredi-darkest-green: #323c32;
 
     --sicredi-text-green: #64c832;
@@ -39,6 +44,10 @@
     --sicredi-white-background: #fbfbfb;
     --sicredi-gray-background: #5a645b;
     --sicredi-green-background: #69be41;
+	
+    --highlighted-content: #e1b12c;
+
+	--background-highlighted: #2f3640;
 }
 
 @media (max-width: 991px) {
@@ -54,8 +63,9 @@
 }
 
 body {
-    background: var(--sicredi-white-background);
-    color: var(--sicredi-text-gray);
+    background-color: linear-gradient(var(--main-color), var(--sicredi-darkest-green));
+    //background: var(--sicredi-white-background);
+    color: var(--white) !important;
 }
 
 body,
@@ -77,3 +87,4 @@ hr {
 *:focus {
     outline-color: var(--blue-dark);
 }
+`;
