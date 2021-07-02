@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import IDragon from '../interfaces/IDragon';
 
 const Api = axios.create({
-	baseURL: 'https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/',
+	baseURL: 'https://5c4b2a47aa8ee500142b4887.mockapi.io/',
 	timeout: 5000,
 });
 
