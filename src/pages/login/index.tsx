@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Container from './styles';
-import { Input, Button } from '../../components';
+import { Input, Button, Card } from '../../components';
 import { useAuth } from '../../hooks/auth';
+import { FiKey, FiUser } from 'react-icons/fi';
 
 interface IState {
 	username: string | undefined;
@@ -28,11 +29,34 @@ export default function Login(): JSX.Element {
 		}
 	};
 
+	const onChange = (value: string, field: string) => {
+		if (field && value) {
+			setData({
+				...data,
+				[field]: value,
+			});
+		}
+	};
+
 	return (
 		<Container>
-			{/* <Input value={ } label={ } />
-			<Input value={ } label={ } /> */}
-			<Button onClick={handleLogin}>Login</Button>
+			<Card>
+				<form onSubmit={handleLogin} action="">
+					<Input
+						name="username"
+						defaultValue={data.username}
+						onChange={onChange}
+						icon={FiUser}
+					/>
+					<Input
+						name="password"
+						defaultValue={data.password}
+						onChange={onChange}
+						icon={FiKey}
+					/>
+					<Button type="submit">Login</Button>
+				</form>
+			</Card>
 		</Container>
 	);
 }
