@@ -32,6 +32,7 @@ export const newDragon = async (
 ): Promise<AxiosResponse<IDragon>> => {
 	const requestDragon: IDragon = {
 		...dragon,
+		id: '',
 		createdAt: new Date().toISOString(),
 	};
 
