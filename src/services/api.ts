@@ -2,13 +2,14 @@ import axios, { AxiosResponse } from 'axios';
 import IDragon from '../interfaces/IDragon';
 
 const Api = axios.create({
-	baseURL: 'http://5c4b2a47aa8ee500142b4887.mockapi.io',
+	baseURL: 'https://5c4b2a47aa8ee500142b4887.mockapi.io/api/v1/dragon/',
+	timeout: 5000,
 });
 
 export default Api;
 
 /*  */
-/* GET .../api/v1 / dragon
+/* GET .../api/v1/dragon
 lista de dragões */
 export const getAllDragons = async (): Promise<AxiosResponse<IDragon[]>> => {
 	const result = await Api.get('/api/v1/dragon/');
@@ -16,7 +17,7 @@ export const getAllDragons = async (): Promise<AxiosResponse<IDragon[]>> => {
 };
 
 /* 
-GET .../api/v1 / dragon /: id
+GET .../api/v1 / dragon/:id
 detalhes de um draão */
 export const getDragon = async (
 	id: string,
@@ -25,22 +26,24 @@ export const getDragon = async (
 	return result;
 };
 
-/* POST .../api/v1 / dragon
+/* POST .../api/v1/dragon
 criação de um dragão */
-export const newDragon = async (
-	dragon: IDragon,
-): Promise<AxiosResponse<IDragon>> => {
+export const newDragon = async (dragon: IDragon): Promise<void> => {
 	const requestDragon: IDragon = {
 		...dragon,
-		id: '',
+		id: null,
+		histories: [],
 		createdAt: new Date().toISOString(),
 	};
+	//const requestDragonStr = JSON.stringify(requestDragon);
 
-	const result = await Api.post('/api/v1/dragon/', requestDragon);
-	return result;
+	// eslint-disable-next-line no-debugger
+	debugger;
+	await Api.post('/api/v1/dragon', dragon);
+	//return result;
 };
 
-/* PUT .../api/v1 / dragon /: id
+/* PUT .../api/v1/ dragon/:id
 edição de um dragão */
 export const editDragon = async (
 	dragon: IDragon,
@@ -49,7 +52,7 @@ export const editDragon = async (
 	return result;
 };
 
-/* DELETE .../api/v1 / dragon /: id
+/* DELETE .../api/v1/dragon/:id
 deleção de um dragão */
 export const deleteDragon = async (
 	id: string,
