@@ -1,13 +1,8 @@
-import React, {
-	createContext,
-	useCallback,
-	useState,
-	useContext,
-} from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 
 import Login from '../services/mocked-login-api';
 import IUser, { ISignInCredentials } from '../interfaces/IUser';
-
+import { useHistory } from 'react-router-dom';
 
 interface AuthState {
 	user: IUser;
@@ -23,11 +18,12 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC = ({ children }) => {
+	const history = useHistory();
+
 	const [data, setData] = useState<AuthState>(() => {
 		const user = localStorage.getItem('@Auth:user');
 
 		if (user) {
-
 			return { user: JSON.parse(user) };
 		}
 
@@ -41,12 +37,12 @@ const AuthProvider: React.FC = ({ children }) => {
 			localStorage.setItem('@Auth:user', JSON.stringify(response));
 			setData({ user: response });
 		}
-
 	}, []);
 
 	const signOut = useCallback(() => {
 		localStorage.removeItem('@Auth:user');
 		setData({} as AuthState);
+		history.push('/login');
 	}, []);
 
 	const updateUser = useCallback(
@@ -54,7 +50,7 @@ const AuthProvider: React.FC = ({ children }) => {
 			localStorage.setItem('@Auth:user', JSON.stringify(user));
 
 			setData({
-				user
+				user,
 			});
 		},
 		[setData],
