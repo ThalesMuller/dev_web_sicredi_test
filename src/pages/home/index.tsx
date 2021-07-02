@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Container from './styles';
+import Container, { CardGrid, Buttons, ButtonRound, BasicInfo } from './styles';
 import { deleteDragon, getAllDragons } from '../../services/api';
 import IDragon from '../../interfaces/IDragon';
-import { Button } from '../../components';
+import { Button, DisplayId, CreatedAt } from '../../components';
 import { useHistory } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 
 export default function Details(): JSX.Element {
 	const history = useHistory();
@@ -19,9 +20,19 @@ export default function Details(): JSX.Element {
 		}
 	}, []);
 
+	const sortById = (a: IDragon, b: IDragon) => {
+		if (a.id && b.id) {
+			return parseInt(a.id, 10) - parseInt(b.id, 10);
+		}
+
+		return 0;
+	};
+
 	const loadDragons = async () => {
 		const data = await getAllDragons();
-		setDragonList(data.data);
+		const sortedList = data.data.sort(sortById);
+
+		setDragonList(sortedList);
 	};
 
 	const handleSelectDragon = (dragon: IDragon) => {
@@ -47,37 +58,41 @@ export default function Details(): JSX.Element {
 		history.push(`/edit/${dragon.id}`);
 	};
 
-	const renderDragon = (dragon: IDragon, index:number) => {
+	const renderDragon = (dragon: IDragon, index: number) => {
 		return (
-			<div key={`dragon-${index}`}>
-				<div onClick={() => handleSelectDragon(dragon)}>
-					{dragon.id && <div>{dragon.id}</div>}
+			<Container key={`dragon-${index}`}>
+				<BasicInfo onClick={() => handleSelectDragon(dragon)}>
+					{dragon.createdAt && <CreatedAt date={dragon.createdAt} />}
+					{dragon.id && <DisplayId>{dragon.id}</DisplayId>}
+
 					{dragon.name && <div>{dragon.name}</div>}
 					{dragon.type && <div>{dragon.type}</div>}
-					{dragon.createdAt && <div>{dragon.createdAt}</div>}
 					{dragon.histories && <div>{dragon.histories}</div>}
-				</div>
-				<Button onClick={() => handleEditDragon(dragon)}>
-					Editar Dragão
-				</Button>
-				<Button onClick={() => handleDeleteDragon(dragon)}>
-					Deletar Dragão
-				</Button>
-				<br />
-			</div>
+				</BasicInfo>
+				<Buttons>
+					<Button onClick={() => handleDeleteDragon(dragon)}>
+						Deletar
+					</Button>
+					<Button onClick={() => handleEditDragon(dragon)}>
+						Editar
+					</Button>
+				</Buttons>
+			</Container>
 		);
 	};
 
 	return (
-		<Container>
-			<Button
+		<>
+			<CardGrid>
+				{dragonList.map((dragon, index) => renderDragon(dragon, index))}
+			</CardGrid>
+			<ButtonRound
 				onClick={() => {
 					handleNewDragon();
 				}}
 			>
-				Novo Dragão
-			</Button>
-			{dragonList.map((dragon, index) => renderDragon(dragon, index))}
-		</Container>
+				<FiPlus size={1472}/>
+			</ButtonRound>
+		</>
 	);
 }
