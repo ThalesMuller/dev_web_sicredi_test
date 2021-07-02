@@ -11,6 +11,6 @@ const Button: React.FC<ButtonProps> = ({ children, loading, ...rest }) => {
 			{loading ? 'Carregando...' : children}
 		</CustomButton>
 	);
-}
+};
 
 export default Button;
