@@ -166,7 +166,7 @@ export default function Details(): JSX.Element {
 			dragon && (
 				<>
 					<CustomImage image={dragonCard?.image} />
-					<form className="details-form">
+					<div className="details-form">
 						{dragon.id && <DisplayId>{dragon.id}</DisplayId>}
 						{dragon.createdAt && (
 							<CreatedAt date={dragon.createdAt} />
@@ -217,14 +217,14 @@ export default function Details(): JSX.Element {
 							)}
 							{origin !== Origin.view && (
 								<Button
-									type="submit"
+									type="button"
 									onClick={() => submitDragon()}
 								>
 									Salvar
 								</Button>
 							)}
 						</Buttons>
-					</form>
+					</div>
 				</>
 			)
 		);

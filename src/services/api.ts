@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import IDragon from '../interfaces/IDragon';
 
 const Api = axios.create({
-	baseURL: 'https://5c4b2a47aa8ee500142b4887.mockapi.io/',
+	baseURL: 'http://5c4b2a47aa8ee500142b4887.mockapi.io',
 	timeout: 5000,
 });
 
@@ -28,19 +28,18 @@ export const getDragon = async (
 
 /* POST .../api/v1/dragon
 criação de um dragão */
-export const newDragon = async (dragon: IDragon): Promise<void> => {
+export const newDragon = async (
+	dragon: IDragon,
+): Promise<AxiosResponse<IDragon> | undefined> => {
 	const requestDragon: IDragon = {
 		...dragon,
 		id: null,
 		histories: [],
 		createdAt: new Date().toISOString(),
 	};
-	//const requestDragonStr = JSON.stringify(requestDragon);
 
-	// eslint-disable-next-line no-debugger
-	debugger;
-	await Api.post('/api/v1/dragon', dragon);
-	//return result;
+	const result = await Api.post('/api/v1/dragon', requestDragon);
+	return result;
 };
 
 /* PUT .../api/v1/ dragon/:id
