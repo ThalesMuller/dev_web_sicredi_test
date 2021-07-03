@@ -17,6 +17,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	containerStyle?: object;
 	icon: React.ComponentType<IconBaseProps>;
+	disabled?: boolean;
+	error?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -26,12 +28,12 @@ const Input: React.FC<InputProps> = ({
 	containerStyle = {},
 	icon: Icon,
 	title = '',
+	disabled = false,
+	error='',
 	...rest
 }) => {
 	const [isFocused, setIsFocused] = useState(false);
 	const [isFilled, setIsFilled] = useState(false);
-
-	/* const { fieldName, defaultValue, error } = useField(name); */
 
 	const handleInputFocus = useCallback(() => {
 		setIsFocused(true);
@@ -39,17 +41,8 @@ const Input: React.FC<InputProps> = ({
 
 	const handleInputBlur = useCallback(() => {
 		setIsFocused(false);
-
-		/* setIsFilled(!!inputRef.current?.value); */
 	}, []);
 
-	/* useEffect(() => {
-		registerField({
-			name: fieldName,
-			path: 'value',
-		});
-	}, [fieldName]);
- */
 	const handleInputChange = (evt: any) => {
 		onChange(evt?.target?.value, evt?.target?.name);
 	};
@@ -57,12 +50,14 @@ const Input: React.FC<InputProps> = ({
 	return (
 		<CustomInput
 			style={containerStyle}
-			/* isErrored={!!error} */
+			isErrored={!!error?.length}
 			isFilled={isFilled}
 			isFocused={isFocused}
+			isDisabled={disabled}
 		>
 			{Icon && <Icon title={title} size={20} />}
 			<input
+				disabled={disabled}
 				name={name}
 				onChange={handleInputChange}
 				onFocus={handleInputFocus}
@@ -71,11 +66,11 @@ const Input: React.FC<InputProps> = ({
 				{...rest}
 			/>
 
-			{/* {error && (
+			{error && (
 				<Error title={error}>
 					<FiAlertCircle color="#c53030" size={20} />
 				</Error>
-			)} */}
+			)}
 		</CustomInput>
 	);
 };

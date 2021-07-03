@@ -5,6 +5,7 @@ interface ICustomInputProps {
 	isFocused: boolean;
 	isFilled: boolean;
 	isErrored?: boolean;
+	isDisabled?: boolean;
 }
 
 const CustomInput = styled.div<ICustomInputProps>`
@@ -21,6 +22,11 @@ const CustomInput = styled.div<ICustomInputProps>`
 	& + div {
 		margin-top: 8px;
 	}
+	${(props) =>
+		props.isDisabled &&
+		css`
+			cursor: not-allowed;
+		`}
 
 	${(props) =>
 		props.isErrored &&
@@ -32,7 +38,7 @@ const CustomInput = styled.div<ICustomInputProps>`
 
   ${(props) => props.isFilled && css``}
 
-  input {
+	input {
 		flex: 1;
 		background: transparent;
 		border: 0;
@@ -41,6 +47,12 @@ const CustomInput = styled.div<ICustomInputProps>`
 		&::placeholder {
 			color: var(---white);
 		}
+
+		${(props) =>
+		props.isDisabled &&
+			css`
+				cursor: not-allowed;
+			`}
 	}
 
 	svg {
