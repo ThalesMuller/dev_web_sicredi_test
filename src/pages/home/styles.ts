@@ -15,6 +15,13 @@ const Container = styled.div`
 	-webkit-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
 	box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
+
+	&:hover {
+		-webkit-box-shadow: 8px 8px 13px -2px rgba(0, 0, 0, 0.75);
+		-moz-box-shadow: 8px 8px 13px -2px rgba(0, 0, 0, 0.75);
+		box-shadow: 8px 8px 13px -2px rgba(0, 0, 0, 0.75);
+	}
+	max-width: 400px;
 `;
 export default Container;
 
@@ -48,6 +55,7 @@ export const CardGrid = styled.div`
 export const Buttons = styled.div`
 	display: flex;
 	width: 100%;
+	max-height: 30%;
 
 	button + button {
 		margin-left: 1rem;
@@ -57,6 +65,10 @@ export const Buttons = styled.div`
 export const BasicInfo = styled.div`
 	position: relative;
 	cursor: pointer;
+	max-width: 100%;
+	max-height: 70%;
+	display: flex;
+	flex-direction: column;
 `;
 
 const bgColor = '#e1b12c';
@@ -79,4 +91,20 @@ export const ButtonRound = styled(Button)`
 
 	color: var(--main-color);
 	background-color: var(--highlighted-content);
+`;
+export const Info = styled.div`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: flex-start;
+	align-items: baseline;
+	max-width: 100%;
+	overflow: hidden;
+	max-height: 20px;
+
+	div {
+		max-width:85%;
+		margin-left: 0.25rem;
+	}
 `;
