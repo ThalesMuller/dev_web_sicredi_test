@@ -5,7 +5,7 @@ import Routes from './routes';
 import GlobalStyle from './styles/global';
 import { Header, HeaderContent } from './styles';
 import { useAuth } from './hooks/auth';
-import { FiPower } from 'react-icons/fi';
+import { FiLogOut } from 'react-icons/fi';
 
 function App(): JSX.Element {
 	const { signOut } = useAuth();
@@ -16,11 +16,11 @@ function App(): JSX.Element {
 				<Header>
 					<HeaderContent>
 						<button type="button" onClick={() => signOut}>
-							{<FiPower />}
+							{<FiLogOut />}
 						</button>
 					</HeaderContent>
 				</Header>
-				
+
 				<Routes />
 			</AppProvider>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Container from './styles';
-import { Input, Button, Card } from '../../components';
+import Container, { Circle, Fields } from './styles';
+import { Input, Button } from '../../components';
 import { useAuth } from '../../hooks/auth';
 import { FiKey, FiUser } from 'react-icons/fi';
 
@@ -11,8 +11,8 @@ interface IState {
 
 export default function Login(): JSX.Element {
 	const [data, setData] = useState<IState>(() => {
-		const username = 'admin';
-		const password = 'admin';
+		const username = '';
+		const password = '';
 		return { username, password };
 	});
 
@@ -40,8 +40,11 @@ export default function Login(): JSX.Element {
 
 	return (
 		<Container>
-			<Card>
-				<form onSubmit={handleLogin} action="">
+			<div className="form-login">
+				<Circle>
+					<FiUser size={40} />
+				</Circle>
+				<Fields>
 					<Input
 						name="username"
 						defaultValue={data.username}
@@ -50,13 +53,14 @@ export default function Login(): JSX.Element {
 					/>
 					<Input
 						name="password"
+						type="password"
 						defaultValue={data.password}
 						onChange={onChange}
 						icon={FiKey}
 					/>
-					<Button type="submit">Login</Button>
-				</form>
-			</Card>
+					<Button onClick={() => handleLogin()}>Login</Button>
+				</Fields>
+			</div>
 		</Container>
 	);
 }

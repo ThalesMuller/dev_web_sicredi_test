@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import Container, { CardGrid, Buttons, ButtonRound, BasicInfo } from './styles';
+import Container, {
+	CardGrid,
+	Buttons,
+	ButtonRound,
+	BasicInfo,
+	Info,
+} from './styles';
 import { deleteDragon, getAllDragons } from '../../services/api';
 import IDragon from '../../interfaces/IDragon';
 import { Button, DisplayId, CreatedAt } from '../../components';
 import { useHistory } from 'react-router-dom';
-import { FiPlus } from 'react-icons/fi';
+import {
+	FiAlignCenter,
+	FiCloudLightning,
+	FiPlus,
+	FiUser,
+} from 'react-icons/fi';
 
 export default function Details(): JSX.Element {
 	const history = useHistory();
@@ -58,6 +69,13 @@ export default function Details(): JSX.Element {
 		history.push(`/edit/${dragon.id}`);
 	};
 
+	const listToString = (arr: string | string[]): string => {
+		if (Array.isArray(arr)) {
+			return arr.join('\n');
+		}
+		return arr;
+	};
+
 	const renderDragon = (dragon: IDragon, index: number) => {
 		return (
 			<Container key={`dragon-${index}`}>
@@ -65,9 +83,26 @@ export default function Details(): JSX.Element {
 					{dragon.createdAt && <CreatedAt date={dragon.createdAt} />}
 					{dragon.id && <DisplayId>{dragon.id}</DisplayId>}
 
-					{dragon.name && <div>{dragon.name}</div>}
-					{dragon.type && <div>{dragon.type}</div>}
-					{dragon.histories && <div>{dragon.histories}</div>}
+					{dragon.name && (
+						<Info>
+							<FiUser />
+							<div title={dragon.name}>{dragon.name}</div>
+						</Info>
+					)}
+					{dragon.type && (
+						<Info>
+							<FiCloudLightning />
+							<div title={dragon.type}>{dragon.type}</div>
+						</Info>
+					)}
+					{dragon.histories.length > 0 && (
+						<Info>
+							<FiAlignCenter />
+							<div title={listToString(dragon.histories)}>
+								{listToString(dragon.histories)}
+							</div>
+						</Info>
+					)}
 				</BasicInfo>
 				<Buttons>
 					<Button onClick={() => handleDeleteDragon(dragon)}>
@@ -91,7 +126,7 @@ export default function Details(): JSX.Element {
 					handleNewDragon();
 				}}
 			>
-				<FiPlus size={1472}/>
+				<FiPlus size={1472} />
 			</ButtonRound>
 		</>
 	);
