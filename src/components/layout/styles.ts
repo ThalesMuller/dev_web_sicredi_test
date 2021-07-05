@@ -40,7 +40,12 @@ export const HeaderContent = styled.div`
 	}
 `;
 export const Content = styled.div`
-	max-width: 100%;
-	max-height: 100%;
-	overflow-y: auto;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+	padding: 15px;
+
+	height: calc(100vh - 45px);
 `;
