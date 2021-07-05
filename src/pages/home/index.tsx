@@ -216,13 +216,9 @@ export default function Details(): JSX.Element {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		try {
-			(async () => {
-				await loadDragons();
-			})();
-		} catch (err) {
-			console.error(err);
-		}
+		(async () => {
+			await loadDragons();
+		})();
 	}, []);
 
 	const sortById = (a: IDragon, b: IDragon) => {
@@ -246,14 +242,10 @@ export default function Details(): JSX.Element {
 		history.push(`/details/${dragon.id}`);
 	};
 	const handleDeleteDragon = async (dragon: IDragon) => {
-		try {
-			const confirm = true;
-			if (confirm && dragon?.id) {
-				await deleteDragon(dragon.id);
-				await loadDragons();
-			}
-		} catch (err) {
-			console.error(err);
+		const confirm = true;
+		if (confirm && dragon?.id) {
+			await deleteDragon(dragon.id);
+			await loadDragons();
 		}
 	};
 

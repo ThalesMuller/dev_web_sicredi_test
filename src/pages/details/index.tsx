@@ -60,13 +60,9 @@ export default function Details(): JSX.Element {
 	useEffect(() => {
 		if (origin !== Origin.new && !dragon?.id) {
 			(async () => {
-				try {
-					const id = locationParams.pathname.split('/')[2];
-					const data = await getDragon(id);
-					setDragon(data?.data ? data.data : defaultDragon);
-				} catch (err) {
-					console.error(err);
-				}
+				const id = locationParams.pathname.split('/')[2];
+				const data = await getDragon(id);
+				setDragon(data?.data ? data.data : defaultDragon);
 			})();
 		}
 	}, [origin]);
@@ -83,18 +79,10 @@ export default function Details(): JSX.Element {
 	};
 
 	const handleDeleteDragon = async () => {
-		try {
-			const confirm = true;
-			if (confirm && dragon?.id) {
-				try {
-					await deleteDragon(dragon.id);
-					history.push('/home');
-				} catch (error) {
-					console.error(error);
-				}
-			}
-		} catch (err) {
-			console.error(err);
+		const confirm = true;
+		if (confirm && dragon?.id) {
+			await deleteDragon(dragon.id);
+			history.push('/home');
 		}
 	};
 
@@ -116,17 +104,9 @@ export default function Details(): JSX.Element {
 			//try {
 			let data;
 			if (origin === Origin.new) {
-				try {
-					data = await newDragon(dragon);
-				} catch (error) {
-					console.error(error);
-				}
+				data = await newDragon(dragon);
 			} else if (origin === Origin.edit && dragon?.id) {
-				try {
-					data = await editDragon(dragon);
-				} catch (error) {
-					console.error(error);
-				}
+				data = await editDragon(dragon);
 			} else {
 				throw new Error(`You can't edit or create in ${origin} mode`);
 			}
@@ -137,9 +117,6 @@ export default function Details(): JSX.Element {
 					history.push(`/details/${data?.data?.id}`);
 				}
 			}
-			/* } catch (err) {
-				console.error(err);
-			} */
 		}
 	};
 

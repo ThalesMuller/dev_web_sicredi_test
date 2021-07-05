@@ -21,11 +21,7 @@ export default function Login(): JSX.Element {
 	const handleLogin = () => {
 		const { username, password } = data;
 		if (username && password) {
-			try {
-				signIn({ username, password });
-			} catch (err) {
-				console.error(err);
-			}
+			signIn({ username, password });
 		}
 	};
 
