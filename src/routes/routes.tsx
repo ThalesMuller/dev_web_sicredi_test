@@ -6,13 +6,18 @@ import {
 } from 'react-router-dom';
 
 import { useAuth } from '../hooks/auth';
+import Layout from '../components/layout';
 
 interface RouteProps extends ReactDOMRouteProps {
 	isPrivate?: boolean;
 	component: React.ComponentType;
 }
 
-function Route({ isPrivate = false, component: Component, ...rest }: RouteProps): JSX.Element {
+function Route({
+	isPrivate = false,
+	component: Component,
+	...rest
+}: RouteProps): JSX.Element {
 	const { user } = useAuth();
 
 	return (
@@ -20,7 +25,9 @@ function Route({ isPrivate = false, component: Component, ...rest }: RouteProps)
 			{...rest}
 			render={({ location }) => {
 				return isPrivate === !!user ? (
-					<Component />
+					<Layout isPrivate={isPrivate}>
+						<Component />
+					</Layout>
 				) : (
 					<Redirect
 						to={{
