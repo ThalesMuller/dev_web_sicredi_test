@@ -1,3 +1,4 @@
+import { error_message, success_message } from '../components/toast';
 import IUser from '../interfaces/IUser';
 
 const users: IUser[] = [
@@ -9,10 +10,11 @@ export default function Login(username: string, password: string): IUser | undef
 	const user: IUser | undefined = users.find(u => u.username === username);
 
 	if (user && user.password === password) {
+		success_message('Usuário conectado com sucesso');
 		return user;
 	}
 	else {
-		console.error('username or password incorrect');
+		error_message('Usuário ou senha incorreto');
 		return undefined;
 	}
 }
