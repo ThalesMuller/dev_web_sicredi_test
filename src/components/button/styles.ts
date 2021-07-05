@@ -14,6 +14,10 @@ const CustomButton = styled.button`
 	transition: background-color 0.2s;
 	cursor: pointer;
 
+	&:disabled {
+		cursor: not-allowed;
+	}
+
 	&:hover {
 		background: ${shade(0.2, bgColor)};
 	}
