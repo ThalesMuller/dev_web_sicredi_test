@@ -19,7 +19,7 @@ const ContainerId = styled.div<DisplayProps>`
 		!props.isHome &&
 		css`
 			position: absolute;
-			top: -54%;
+			top: -41%;
 			right: 1%;
 			transform: translate(-1%, 0);
 		`}

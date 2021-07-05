@@ -27,12 +27,11 @@ const Container = styled.div`
 export default Container;
 
 export const CardGrid = styled.div`
-	padding: 15px;
 	display: grid;
 	overflow-y: auto;
 	overflow-x: hidden;
-	max-height: calc(100vh - 45px);
-	max-width: 100vw;
+	max-height: 100%;
+	max-width: 100%;
 
 	grid-gap: 15px;
 

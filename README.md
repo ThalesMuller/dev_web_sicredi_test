@@ -3,6 +3,13 @@
 Sistema implementado em React + Typescript para um [teste para desenvolvedor Web do Sicredi](https://github.com/WoopSicredi/jobs/issues/6).
 Tem como principal função, a manipuação de uma API que armazena dragões.
 
+### Logar utilizando as credenciais:
+
+```
+Login: admin
+Senha: admin
+```
+
 ## Foram utilizados os seguintes frameworks:
 
 -   styled-components

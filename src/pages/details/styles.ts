@@ -4,12 +4,11 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 55px);
+	height: 100%;
 	width: 100%;
 	flex-direction: column;
 	max-width: 800px;
 	margin: 5px auto;
-	padding: 1px 15px 1px 15px;
 
 	.details-form {
 		-webkit-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
@@ -22,6 +21,11 @@ const Container = styled.div`
 		background-color: var(--background-highlighted);
 		width: 100%;
 		position: relative;
+		height: 70%;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 `;
 
@@ -29,8 +33,7 @@ interface IImageProps {
 	image?: string;
 }
 export const CustomImage = styled.div<IImageProps>`
-	max-height: 150px;
-	min-height: 200px;
+	height:30%;
 	width: 100%;
 	border-top-left-radius: 0.25rem;
 	border-top-right-radius: 0.25rem;
