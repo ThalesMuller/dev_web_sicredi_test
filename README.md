@@ -33,3 +33,4 @@ Senha: admin
 -   Implementar uma api de login com token
 -   Criar uma trasnsição melhor entre as paginas
 -   Utilizar de drag-n-drops para manipular os dragões
+-   Implementar breadcrumbs para melhorar a navegação da página
