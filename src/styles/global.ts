@@ -1,4 +1,5 @@
 ﻿import { createGlobalStyle } from 'styled-components';
+import loginDragon from '../assets/loginDragon.jpg';
 
 export default createGlobalStyle`
 
@@ -48,6 +49,9 @@ export default createGlobalStyle`
     --highlighted-content: #e1b12c;
 
 	--background-highlighted: #2f3640;
+	--background-highlighted-transparent: rgba(47, 54, 64, 0.9);
+	--highlight-warn: #c23616;
+	
 }
 
 @media (max-width: 991px) {
@@ -63,7 +67,13 @@ export default createGlobalStyle`
 }
 
 body {
-    background-color: linear-gradient(var(--main-color), var(--sicredi-darkest-green));
+	overflow:hidden;
+	width:100%;
+	height:100%;
+    background-image: url(${loginDragon});
+	background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     //background: var(--sicredi-white-background);
     color: var(--white) !important;
 }
@@ -86,5 +96,10 @@ hr {
 
 *:focus {
     outline-color: var(--blue-dark);
+}
+html {
+	overflow:hidden;
+	width:100%;
+	height:100%;
 }
 `;
