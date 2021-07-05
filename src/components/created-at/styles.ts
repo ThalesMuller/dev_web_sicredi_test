@@ -7,7 +7,8 @@ export const Container = styled.div`
 	font-style: italic;
 	padding: 5px;
 	justify-content: flex-end;
-
+	margin-top: 15px;
+	
 	div + div {
 		margin-left: 5px;
 	}

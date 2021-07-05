@@ -5,10 +5,11 @@ import Container, {
 	ButtonRound,
 	BasicInfo,
 	Info,
+	IdContainer,
 } from './styles';
 import { deleteDragon, getAllDragons } from '../../services/api';
 import IDragon from '../../interfaces/IDragon';
-import { Button, DisplayId, CreatedAt } from '../../components';
+import { Button, CreatedAt, DisplayId } from '../../components';
 import { useHistory } from 'react-router-dom';
 import {
 	FiAlignCenter,
@@ -17,18 +18,207 @@ import {
 	FiUser,
 } from 'react-icons/fi';
 
+const initialDragonLIst: IDragon[] = [
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+	{
+		createdAt: '2021-06-25T21:07:29.475Z',
+		name: '.....',
+		type: '.....',
+		histories: '...................................',
+		id: '-',
+	},
+];
+
 export default function Details(): JSX.Element {
 	const history = useHistory();
-	const [dragonList, setDragonList] = useState<IDragon[]>([]);
+	const [dragonList, setDragonList] = useState<IDragon[]>(initialDragonLIst);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		try {
-			(async () => {
-				await loadDragons();
-			})();
-		} catch (err) {
-			console.error(err);
-		}
+		(async () => {
+			await loadDragons();
+		})();
 	}, []);
 
 	const sortById = (a: IDragon, b: IDragon) => {
@@ -40,24 +230,22 @@ export default function Details(): JSX.Element {
 	};
 
 	const loadDragons = async () => {
+		setLoading(true);
 		const data = await getAllDragons();
-		const sortedList = data.data.sort(sortById);
+		const sortedList = data?.data.sort(sortById);
 
-		setDragonList(sortedList);
+		setDragonList(sortedList ? sortedList : []);
+		setLoading(false);
 	};
 
 	const handleSelectDragon = (dragon: IDragon) => {
 		history.push(`/details/${dragon.id}`);
 	};
 	const handleDeleteDragon = async (dragon: IDragon) => {
-		try {
-			const confirm = true;
-			if (confirm && dragon?.id) {
-				await deleteDragon(dragon.id);
-				await loadDragons();
-			}
-		} catch (err) {
-			console.error(err);
+		const confirm = true;
+		if (confirm && dragon?.id) {
+			await deleteDragon(dragon.id);
+			await loadDragons();
 		}
 	};
 
@@ -80,8 +268,11 @@ export default function Details(): JSX.Element {
 		return (
 			<Container key={`dragon-${index}`}>
 				<BasicInfo onClick={() => handleSelectDragon(dragon)}>
-					{dragon.createdAt && <CreatedAt date={dragon.createdAt} />}
-					{dragon.id && <DisplayId>{dragon.id}</DisplayId>}
+					{dragon.id && (
+						<IdContainer>
+							<DisplayId isHome>{dragon.id}</DisplayId>
+						</IdContainer>
+					)}
 
 					{dragon.name && (
 						<Info>
@@ -103,6 +294,7 @@ export default function Details(): JSX.Element {
 							</div>
 						</Info>
 					)}
+					{dragon.createdAt && <CreatedAt date={dragon.createdAt} />}
 				</BasicInfo>
 				<Buttons>
 					<Button onClick={() => handleDeleteDragon(dragon)}>

@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 import Login from '../services/mocked-login-api';
 import IUser, { ISignInCredentials } from '../interfaces/IUser';
 import { useHistory } from 'react-router-dom';
+import { error_message } from '../components/toast';
 
 interface AuthState {
 	user: IUser;
@@ -42,6 +43,7 @@ const AuthProvider: React.FC = ({ children }) => {
 	const signOut = useCallback(() => {
 		localStorage.removeItem('@Auth:user');
 		setData({} as AuthState);
+		error_message('Usuário desconectado com sucesso!');
 		history.push('/login');
 	}, []);
 

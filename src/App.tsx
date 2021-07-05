@@ -3,24 +3,23 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import AppProvider from './hooks';
 import Routes from './routes';
 import GlobalStyle from './styles/global';
-import { Header, HeaderContent } from './styles';
-import { useAuth } from './hooks/auth';
-import { FiLogOut } from 'react-icons/fi';
+import { ToastContainer } from 'react-toastify';
 
 function App(): JSX.Element {
-	const { signOut } = useAuth();
-
 	return (
 		<Router>
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+			/>
 			<AppProvider>
-				<Header>
-					<HeaderContent>
-						<button type="button" onClick={() => signOut}>
-							{<FiLogOut />}
-						</button>
-					</HeaderContent>
-				</Header>
-
 				<Routes />
 			</AppProvider>
 

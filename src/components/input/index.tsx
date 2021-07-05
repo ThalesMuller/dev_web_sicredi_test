@@ -29,7 +29,7 @@ const Input: React.FC<InputProps> = ({
 	icon: Icon,
 	title = '',
 	disabled = false,
-	error='',
+	error = '',
 	...rest
 }) => {
 	const [isFocused, setIsFocused] = useState(false);

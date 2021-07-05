@@ -6,7 +6,9 @@ export const Header = styled.header`
 	background: var(--background-highlighted);
 	z-index: 10;
 	position: relative;
+	height: 45px;
 `;
+
 const btnColor = '#f5f6fa';
 export const HeaderContent = styled.div`
 	padding: 0 1rem;
@@ -20,7 +22,9 @@ export const HeaderContent = styled.div`
 	}
 
 	button {
-		margin-left: auto;
+		align-content: center;
+		display: flex;
+		margin-left: 10px;
 		background: transparent;
 		border: 0;
 		cursor: pointer;
@@ -34,4 +38,9 @@ export const HeaderContent = styled.div`
 			}
 		}
 	}
+`;
+export const Content = styled.div`
+	max-width: 100%;
+	max-height: 100%;
+	overflow-y: auto;
 `;

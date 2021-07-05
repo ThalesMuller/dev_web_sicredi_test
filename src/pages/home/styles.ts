@@ -1,6 +1,6 @@
 import { shade } from 'polished';
 import styled from 'styled-components';
-import { Button } from '../../components';
+import { Button, CreatedAt, DisplayId } from '../../components';
 
 const Container = styled.div`
 	display: flex;
@@ -9,8 +9,10 @@ const Container = styled.div`
 	min-height: 250px;
 	max-height: 250px;
 	padding: 15px;
-	background-color: var(--background-highlighted);
+	background-color: var(--background-highlighted-transparent);
 	border-radius: 0.25rem;
+
+	max-width: 360px;
 
 	-webkit-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
 	-moz-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
@@ -21,15 +23,18 @@ const Container = styled.div`
 		-moz-box-shadow: 8px 8px 13px -2px rgba(0, 0, 0, 0.75);
 		box-shadow: 8px 8px 13px -2px rgba(0, 0, 0, 0.75);
 	}
-	max-width: 400px;
 `;
 export default Container;
 
 export const CardGrid = styled.div`
 	padding: 15px;
 	display: grid;
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: calc(100vh - 45px);
+	max-width: 100vw;
 
-	grid-gap: 30px;
+	grid-gap: 15px;
 
 	@media only screen and (max-width: 600px) {
 		grid-template-columns: repeat(1, 1fr);
@@ -82,8 +87,8 @@ export const ButtonRound = styled(Button)`
 	justify-content: center;
 	align-items: center;
 	position: fixed;
-	bottom: 1rem;
-	right: 1rem;
+	bottom: 1.5rem;
+	right: 2rem;
 
 	&:hover {
 		background: ${shade(0.2, bgColor)};
@@ -104,7 +109,12 @@ export const Info = styled.div`
 	max-height: 20px;
 
 	div {
-		max-width:85%;
+		max-width: 85%;
 		margin-left: 0.25rem;
 	}
+`;
+
+export const IdContainer = styled.div`
+	display: flex;
+	justify-content: flex-end; ;
 `;

@@ -1,9 +1,12 @@
 import React from 'react';
 import ContainerId, { Id } from './styles';
 
-const DisplayId: React.FC = ({ children }) => {
+type DisplayProps = {
+	isHome?: boolean;
+};
+const DisplayId: React.FC<DisplayProps> = ({ isHome, children }) => {
 	return (
-		<ContainerId>
+		<ContainerId isHome={isHome}>
 			<Id>{children}</Id>
 		</ContainerId>
 	);

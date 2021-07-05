@@ -21,11 +21,7 @@ export default function Login(): JSX.Element {
 	const handleLogin = () => {
 		const { username, password } = data;
 		if (username && password) {
-			try {
-				signIn({ username, password });
-			} catch (err) {
-				console.error(err);
-			}
+			signIn({ username, password });
 		}
 	};
 
@@ -36,6 +32,15 @@ export default function Login(): JSX.Element {
 				[field]: value,
 			});
 		}
+	};
+
+	const isFormValid = () => {
+		const isUserEmpty = !data.username || data.username?.length < 1;
+		const isPassEmpty = !data.password || data.password?.length < 1;
+		if (isUserEmpty || isPassEmpty) {
+			return false;
+		}
+		return true;
 	};
 
 	return (
@@ -50,6 +55,11 @@ export default function Login(): JSX.Element {
 						defaultValue={data.username}
 						onChange={onChange}
 						icon={FiUser}
+						error={
+							!data.username || data.username?.length < 1
+								? 'Insira um usuário válido'
+								: ''
+						}
 					/>
 					<Input
 						name="password"
@@ -57,8 +67,18 @@ export default function Login(): JSX.Element {
 						defaultValue={data.password}
 						onChange={onChange}
 						icon={FiKey}
+						error={
+							!data.password || data.password?.length < 1
+								? 'Insira sua senha'
+								: ''
+						}
 					/>
-					<Button onClick={() => handleLogin()}>Login</Button>
+					<Button
+						disabled={!isFormValid()}
+						onClick={() => handleLogin()}
+					>
+						Login
+					</Button>
 				</Fields>
 			</div>
 		</Container>

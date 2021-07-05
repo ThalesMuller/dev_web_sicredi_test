@@ -12,7 +12,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { FiAlignCenter, FiCloudLightning, FiUser } from 'react-icons/fi';
 
 import dragon1 from '../../assets/dragon1.jpg';
-import dragon2 from '../../assets/dragon2.jpeg';
+import dragon2 from '../../assets/dragon2.png';
 import dragon3 from '../../assets/dragon3.jpg';
 
 enum Origin {
@@ -24,18 +24,18 @@ enum Origin {
 interface IDragonCard {
 	image?: string;
 }
-
+const defaultDragon: IDragon = {
+	id: null,
+	createdAt: null,
+	histories: '',
+	type: '',
+	name: '',
+};
 export default function Details(): JSX.Element {
 	const locationParams = useLocation();
 	const history = useHistory();
 	const [origin, setOrigin] = useState<Origin>(Origin.new);
-	const [dragon, setDragon] = useState<IDragon>({
-		id: null,
-		createdAt: null,
-		histories: '',
-		type: '',
-		name: '',
-	});
+	const [dragon, setDragon] = useState<IDragon>(defaultDragon);
 	const [dragonCard, setDragonCard] = useState<IDragonCard>({});
 
 	useEffect(() => {
@@ -60,13 +60,9 @@ export default function Details(): JSX.Element {
 	useEffect(() => {
 		if (origin !== Origin.new && !dragon?.id) {
 			(async () => {
-				try {
-					const id = locationParams.pathname.split('/')[2];
-					const data = await getDragon(id);
-					setDragon(data.data);
-				} catch (err) {
-					console.error(err);
-				}
+				const id = locationParams.pathname.split('/')[2];
+				const data = await getDragon(id);
+				setDragon(data?.data ? data.data : defaultDragon);
 			})();
 		}
 	}, [origin]);
@@ -83,24 +79,23 @@ export default function Details(): JSX.Element {
 	};
 
 	const handleDeleteDragon = async () => {
-		try {
-			const confirm = true;
-			if (confirm && dragon?.id) {
-				try {
-					await deleteDragon(dragon.id);
-					history.push('/home');
-				} catch (error) {
-					console.error(error);
-				}
-			}
-		} catch (err) {
-			console.error(err);
+		const confirm = true;
+		if (confirm && dragon?.id) {
+			await deleteDragon(dragon.id);
+			history.push('/home');
 		}
 	};
 
 	const handleEditDragon = () => {
 		if (dragon && origin !== Origin.new) {
 			setOrigin(Origin.edit);
+			history.push(`/edit/${dragon?.id}`);
+		}
+	};
+	const handleCancel = () => {
+		if (dragon && origin === Origin.edit) {
+			setOrigin(Origin.view);
+			history.push(`/details/${dragon?.id}`);
 		}
 	};
 
@@ -109,17 +104,9 @@ export default function Details(): JSX.Element {
 			//try {
 			let data;
 			if (origin === Origin.new) {
-				try {
-					data = await newDragon(dragon);
-				} catch (error) {
-					console.error(error);
-				}
+				data = await newDragon(dragon);
 			} else if (origin === Origin.edit && dragon?.id) {
-				try {
-					data = await editDragon(dragon);
-				} catch (error) {
-					console.error(error);
-				}
+				data = await editDragon(dragon);
 			} else {
 				throw new Error(`You can't edit or create in ${origin} mode`);
 			}
@@ -130,9 +117,6 @@ export default function Details(): JSX.Element {
 					history.push(`/details/${data?.data?.id}`);
 				}
 			}
-			/* } catch (err) {
-				console.error(err);
-			} */
 		}
 	};
 
@@ -151,6 +135,16 @@ export default function Details(): JSX.Element {
 			return false;
 		}
 	};
+	const isFormValid = (): boolean => {
+		const isTypeEmpty = dragon.type.length < 1;
+		const isNameEmpty = dragon.name.length < 1;
+
+		if (isTypeEmpty || isNameEmpty) {
+			return false;
+		}
+
+		return true;
+	};
 
 	const onChange = (value: string, field: string) => {
 		if (field && isPropValid(field)) {
@@ -168,9 +162,6 @@ export default function Details(): JSX.Element {
 					<CustomImage image={dragonCard?.image} />
 					<div className="details-form">
 						{dragon.id && <DisplayId>{dragon.id}</DisplayId>}
-						{dragon.createdAt && (
-							<CreatedAt date={dragon.createdAt} />
-						)}
 						<Input
 							disabled={origin === Origin.view}
 							title="Nome"
@@ -178,6 +169,12 @@ export default function Details(): JSX.Element {
 							onChange={onChange}
 							name="name"
 							icon={FiUser}
+							error={
+								dragon?.name.length > 1 ||
+								origin === Origin.view
+									? ''
+									: 'Digite um nome para o dragão'
+							}
 							placeholder="Nome do Dragão"
 						/>
 						<Input
@@ -187,6 +184,12 @@ export default function Details(): JSX.Element {
 							onChange={onChange}
 							name="type"
 							icon={FiCloudLightning}
+							error={
+								dragon?.type.length > 1 ||
+								origin === Origin.view
+									? ''
+									: 'Digite um tipo para o dragão'
+							}
 							placeholder="Tipo do Dragão"
 						/>
 						<Input
@@ -198,26 +201,38 @@ export default function Details(): JSX.Element {
 							icon={FiAlignCenter}
 							placeholder="História do Dragão"
 						/>
+						{dragon.createdAt && (
+							<CreatedAt date={dragon.createdAt} />
+						)}
 						<Buttons>
-							{origin !== Origin.new && (
-								<Button
-									type="button"
-									onClick={() => handleDeleteDragon()}
-								>
-									Deletar
-								</Button>
-							)}
 							{origin === Origin.view && (
+								<>
+									<Button
+										type="button"
+										onClick={() => handleDeleteDragon()}
+									>
+										Deletar
+									</Button>
+									<Button
+										type="button"
+										onClick={() => handleEditDragon()}
+									>
+										Editar
+									</Button>
+								</>
+							)}
+							{origin === Origin.edit && (
 								<Button
 									type="button"
-									onClick={() => handleEditDragon()}
+									onClick={() => handleCancel()}
 								>
-									Editar
+									Cancelar
 								</Button>
 							)}
 							{origin !== Origin.view && (
 								<Button
 									type="button"
+									disabled={!isFormValid()}
 									onClick={() => submitDragon()}
 								>
 									Salvar
