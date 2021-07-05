@@ -5,7 +5,7 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 47.61px);
+	height: calc(100vh);
 	width: 100%;
 	flex-direction: column;
 	max-width: 500px;
@@ -20,7 +20,7 @@ const Container = styled.div`
 		padding: 2rem;
 		border-radius: 0.25rem;
 
-		background-color: var(--background-highlighted);
+		background-color: var(--background-highlighted-transparent);
 		width: 100%;
 		height: 70%;
 		display: flex;
