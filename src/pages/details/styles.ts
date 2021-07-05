@@ -4,13 +4,13 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: calc(100vh - 47.61px);
+	height: calc(100vh - 55px);
 	width: 100%;
 	flex-direction: column;
 	max-width: 800px;
-	margin: 0 auto;
+	margin: 5px auto;
 	padding: 1px 15px 1px 15px;
-	
+
 	.details-form {
 		-webkit-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
 		-moz-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
@@ -38,14 +38,14 @@ export const CustomImage = styled.div<IImageProps>`
 	background-repeat: no-repeat;
 
 	-webkit-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
-		-moz-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
-		box-shadow: 8px 18px 11px -4px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 8px 8px 11px -4px rgba(0, 0, 0, 0.75);
+	box-shadow: 8px 18px 11px -4px rgba(0, 0, 0, 0.75);
 
 	${(props) =>
 		props.image &&
 		css`
 			background-position: ${props.image ===
-			'/static/media/dragon1.38277ad6.jpg' ? 'bottom': 'inherit'};
+			'/static/media/dragon1.38277ad6.jpg' ? 'bottom' : 'inherit'};
 			background-image: url(${props.image});
 		`}
 `;
