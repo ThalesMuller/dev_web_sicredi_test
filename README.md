@@ -34,3 +34,6 @@ Senha: admin
 -   Criar uma trasnsição melhor entre as paginas
 -   Utilizar de drag-n-drops para manipular os dragões
 -   Implementar breadcrumbs para melhorar a navegação da página
+-   Implementar testes unitarios e funcionais
+-   Melhorar as validações de formulários
+-   Criar um componente de modal para confimação de ações
